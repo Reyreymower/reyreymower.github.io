@@ -208,7 +208,7 @@
     
     <!-- CTA Video Section -->
     <section class="cta-video">
-        <a href="https://youtu.be/FPoG7ZtUu0g?si=0nN1r86ya-ozU6y9" class="cta-video__play" data-fancybox>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="cta-video__play" data-fancybox>
             <i class="bi bi-play-fill"></i>
         </a>
     </section>
@@ -870,13 +870,11 @@
     </section>
     
     <!-- Appointment Section -->
-    <section class="section appointment" id="appointment">
+   <section class="section appointment" id="appointment">
     <div class="container">
         <div class="appointment__wrapper">
 
-            <form class="appointment__form" data-aos="fade-up"
-                  action="https://formsubmit.co/obirramazan@gmail.com"
-                  method="POST">
+            <form class="appointment__form" data-aos="fade-up">
 
                 <h3 class="appointment__form-title">Randevunuzu Alın</h3>
 
@@ -884,7 +882,7 @@
                     <label class="form__label" for="name">Ad Soyad</label>
                     <input type="text"
                            id="name"
-                           name="Ad Soyad"
+                           name="adsoyad"
                            class="form__input"
                            placeholder="Adınızı girin"
                            required>
@@ -894,7 +892,7 @@
                     <label class="form__label" for="phone">Telefon Numarası</label>
                     <input type="tel"
                            id="phone"
-                           name="Telefon"
+                           name="telefon"
                            class="form__input"
                            placeholder="05XXXXXXXXX"
                            inputmode="numeric"
@@ -907,7 +905,7 @@
                 <div class="form__group">
                     <label class="form__label" for="service">Hizmet Seçin</label>
                     <select id="service"
-                            name="Hizmet"
+                            name="hizmet"
                             class="form__select"
                             required>
                         <option value="">Bir hizmet seçin</option>
@@ -924,7 +922,7 @@
                     <label class="form__label" for="date">Tercih Edilen Gün</label>
                     <input type="date"
                            id="date"
-                           name="Tarih"
+                           name="tarih"
                            class="form__input"
                            required>
                 </div>
@@ -932,7 +930,7 @@
                 <div class="form__group">
                     <label class="form__label" for="time">Tercih Edilen Saat</label>
                     <select id="time"
-                            name="Saat"
+                            name="saat"
                             class="form__select"
                             required>
                         <option value="">Bir zaman seçin</option>
@@ -950,11 +948,6 @@
                     </select>
                 </div>
 
-                <!-- FORM SUBMIT AYARLARI -->
-                <input type="hidden" name="_subject" value="📅 Yeni Randevu Talebi">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-
                 <div class="form__submit">
                     <button type="submit" class="btn btn--primary">
                         Randevu Alın
@@ -966,6 +959,34 @@
         </div>
     </div>
 </section>
+
+<script>
+document.querySelector(".appointment__form").addEventListener("submit", function(e) {
+e.preventDefault();
+
+fetch("https://script.google.com/macros/s/AKfycbySGwjQIRFEF2zWKcy_C267unZgHDz4Jwf8VRikpcJXFEuHHZ6ANFxP_HZ_qw12z4Y7/exec", {
+method: "POST",
+body: JSON.stringify({
+adsoyad: document.querySelector("[name=adsoyad]").value,
+telefon: document.querySelector("[name=telefon]").value,
+hizmet: document.querySelector("[name=hizmet]").value,
+tarih: document.querySelector("[name=tarih]").value,
+saat: document.querySelector("[name=saat]").value
+})
+})
+.then(res => res.text())
+.then(data => {
+
+if(data=="DOLU"){
+alert("❌ Bu saat dolu");
+}else{
+alert("✅ Randevu oluşturuldu");
+document.querySelector(".appointment__form").reset();
+}
+
+});
+});
+</script>
     
     <!-- Blog Section -->
     <section class="section blog" id="blog">
@@ -1150,5 +1171,137 @@
     
     <script src="./assets/js/app.js"></script>
 
+<section class="section appointment" id="appointment">
+    <div class="container">
+        <div class="appointment__wrapper">
+
+            <form class="appointment__form" data-aos="fade-up">
+
+                <h3 class="appointment__form-title">Randevunuzu Alın</h3>
+
+                <div class="form__group">
+                    <label class="form__label" for="name">Ad Soyad</label>
+                    <input type="text"
+                           id="name"
+                           name="adsoyad"
+                           class="form__input"
+                           placeholder="Adınızı girin"
+                           required>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="phone">Telefon Numarası</label>
+                    <input type="tel"
+                           id="phone"
+                           name="telefon"
+                           class="form__input"
+                           placeholder="05XXXXXXXXX"
+                           inputmode="numeric"
+                           pattern="0[0-9]{10}"
+                           maxlength="11"
+                           oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                           required>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="service">Hizmet Seçin</label>
+                    <select id="service"
+                            name="hizmet"
+                            class="form__select"
+                            required>
+                        <option value="">Bir hizmet seçin</option>
+                        <option value="Hassas Saç Kesimi">Hassas Saç Kesimi</option>
+                        <option value="Sakal Bakımı">Sakal Bakımı</option>
+                        <option value="Sıcak Havlu Tıraş">Sıcak Havlu Tıraş</option>
+                        <option value="Saç Şekillendirme">Saç Şekillendirme</option>
+                        <option value="Saç Boyama">Saç Boyama</option>
+                        <option value="Saç Derisi Tedavisi">Saç Derisi Tedavisi</option>
+                    </select>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="date">Tercih Edilen Gün</label>
+                    <input type="date"
+                           id="date"
+                           name="tarih"
+                           class="form__input"
+                           required>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__label" for="time">Tercih Edilen Saat</label>
+                    <select id="time"
+                            name="saat"
+                            class="form__select"
+                            required>
+                        <option value="">Bir zaman seçin</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                    </select>
+                </div>
+
+                <div class="form__submit">
+                    <button type="submit" class="btn btn--primary">
+                        Randevu Alın
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+
+const form=document.querySelector(".appointment__form");
+
+/* TEMANIN JS'İNİ FORM DIŞI BIRAK */
+form.classList.add("no-theme-submit");
+
+/* TÜM ESKİ EVENTLERİ TEMİZLE */
+const newForm=form.cloneNode(true);
+form.parentNode.replaceChild(newForm,form);
+
+newForm.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+fetch("https://script.google.com/macros/s/AKfycbySGwjQIRFEF2zWKcy_C267unZgHDz4Jwf8VRikpcJXFEuHHZ6ANFxP_HZ_qw12z4Y7/exec",{
+method:"POST",
+body:JSON.stringify({
+adsoyad:newForm.querySelector("[name=adsoyad]").value,
+telefon:newForm.querySelector("[name=telefon]").value,
+hizmet:newForm.querySelector("[name=hizmet]").value,
+tarih:newForm.querySelector("[name=tarih]").value,
+saat:newForm.querySelector("[name=saat]").value
+})
+})
+.then(r=>r.text())
+.then(data=>{
+
+if(data=="DOLU"){
+alert("❌ Bu saat dolu");
+}else{
+alert("✅ Randevu oluşturuldu");
+newForm.reset();
+}
+
+});
+
+});
+
+});
+</script>
 </body>
 </html>
